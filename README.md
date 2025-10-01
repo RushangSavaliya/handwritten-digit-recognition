@@ -1,23 +1,23 @@
 # Handwritten Digit Recognition
 
-Minimal digit classifier using KNN with sklearn digits dataset.
+Minimal digit classifier using KNN with Scikit-learn digits dataset.
 
 ## Usage
 
+### 1. Install dependencies
+
 ```bash
-# Install dependencies
 pip install -r requirements.txt
+```
 
-# Predict digit
+### 2. Predict a digit from your image
+
+```bash
 python src/predict.py my_images/3_300x300_20-brush.png
-
-# Use different k value 
-python src/predict.py my_images/3_300x300_20-brush.png 5
 ```
 
 ## How it works
 
-1. Loads sklearn digits dataset (8x8 images)
+1. Loads Scikit-learn digits dataset (8x8 images)
 2. Trains KNN classifier
-3. Preprocesses your image to 8x8 
-4. Predicts digit with confidence score
+3. Preprocesses your image to 8x8
