@@ -1,16 +1,23 @@
 # src/preprocess.py
 
-from skimage import io, color, transform
+import cv2
 import numpy as np
 
 def preprocess_image(image_path):
-    # Load image
-    image = io.imread(image_path)
-    # Convert to grayscale
-    gray = color.rgb2gray(image) if image.ndim == 3 else image.astype(float)
-    gray = (gray - gray.min()) / (gray.max() - gray.min() + 1e-8)
+    # Load image in grayscale
+    image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    
+    # Normalize to 0-1 range
+    gray = image.astype(np.float32) / 255.0
+    
+    # Invert if background is white (mean > 0.5)
     if gray.mean() > 0.5:
         gray = 1 - gray
-    resized = transform.resize(gray, (8, 8), anti_aliasing=True)
+    
+    # Resize to 8x8
+    resized = cv2.resize(gray, (8, 8), interpolation=cv2.INTER_AREA)
+    
+    # Final normalization
     resized = (resized - resized.min()) / (resized.max() - resized.min() + 1e-8)
+    
     return resized.flatten().astype(np.float32)
