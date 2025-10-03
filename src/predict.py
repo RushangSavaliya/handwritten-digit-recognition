@@ -12,5 +12,5 @@ else:
     # 2nd: preprocess the input image
     image_data = preprocess_image(sys.argv[1])
     # 3rd: predict the digit
-    prediction = model.predict([image_data])[0]
+    prediction = model.predict([image_data])
     print("Predicted digit:", prediction)
